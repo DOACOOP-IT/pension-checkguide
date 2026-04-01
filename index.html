@@ -108,18 +108,21 @@
       color: var(--primary-hover);
     }
 
+    /* 🚀 ปรับแต่งรูปภาพให้รู้ว่าคลิกได้ */
     .image-showcase {
       width: 100%;
       border-radius: 12px;
       border: 1px solid #e0e0f5;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      margin: 20px 0;
-      transition: transform 0.3s ease;
+      margin: 15px 0 25px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: block;
+      cursor: pointer; /* เปลี่ยนเมาส์เป็นรูปนิ้วชี้ */
     }
 
     .image-showcase:hover {
       transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(138, 138, 230, 0.3);
     }
 
     .btn-top {
@@ -137,9 +140,64 @@
     .btn-top:hover {
       background: var(--primary-hover);
     }
+
+    /* 🚀 สไตล์สำหรับระบบขยายรูปภาพ (Lightbox) */
+    .lightbox {
+      display: none; /* ซ่อนไว้ก่อน */
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85); /* พื้นหลังสีดำโปร่งแสง */
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      cursor: zoom-out; /* เมาส์รูปแว่นขยายเครื่องหมายลบ */
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      color: var(--primary);
+    }
   </style>
 </head>
 <body>
+
+  <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" src="" alt="ภาพขยาย">
+  </div>
 
   <div class="container">
     
@@ -150,81 +208,81 @@
 
     <div class="card">
       <h2 class="card-title"><span class="material-icons-round">cloud_upload</span> 1. การนำเข้าและประมวลผลข้อมูล</h2>
-      <p>ระบบถูกออกแบบมาให้อ่านข้อมูลจากไฟล์เอกสาร PDF และจัดเรียงเป็นตารางให้โดยอัตโนมัติ ใช้งานง่ายๆ ดังนี้:</p>
+      <p>คุณสามารถอัปเดตข้อมูลเข้าระบบได้ง่ายๆ ผ่านแผงควบคุมด้านซ้ายมือ ดังรูป (คลิกที่รูปเพื่อขยาย):</p>
       
-      <img src="1.png" alt="หน้าต่างนำเข้าข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+      <img src="1.png" alt="หน้าต่างนำเข้าข้อมูล" class="image-showcase" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">looks_one</span>
-          <div>ไปที่แถบเมนูด้านซ้าย ในส่วนของ <b>"เลือกชีตปลายทาง"</b> ให้ปล่อยเป็น <span class="highlight">✨ ตรวจสอบอัตโนมัติ</span> เพื่อให้ระบบคัดแยกกรมและประเภทให้เอง</div>
+          <div><b>เลือกชีตปลายทาง:</b> ให้ปล่อยเป็น <span class="highlight">✨ ตรวจสอบอัตโนมัติ</span> เพื่อให้ระบบคัดแยกกรมและประเภทให้เอง</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">looks_two</span>
-          <div>คลิกที่กล่องสี่เหลี่ยม <b>"คลิกที่นี่เพื่อเลือกไฟล์ PDF"</b> หรือลากไฟล์ PDF มาวางในกล่อง (สามารถเลือกหลายไฟล์พร้อมกันได้)</div>
+          <div><b>เลือกไฟล์ PDF:</b> คลิกที่กล่องสี่เหลี่ยม หรือลากไฟล์ PDF มาวาง (สามารถเลือกหลายไฟล์พร้อมกันได้)</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">looks_3</span>
-          <div>คลิกปุ่ม <span class="highlight">▶ เริ่มการประมวลผล</span> สีน้ำเงิน และรอระบบดำเนินการสกัดข้อมูลจนเสร็จสิ้น</div>
+          <div><b>ประมวลผล:</b> คลิกปุ่ม <span class="highlight">▶ เริ่มการประมวลผล</span> สีน้ำเงิน และรอระบบดำเนินการสกัดข้อมูลจนเสร็จสิ้น</div>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h2 class="card-title"><span class="material-icons-round">table_chart</span> 2. การค้นหาและจัดการตารางข้อมูล</h2>
-      <p>เมื่อนำเข้าข้อมูลเรียบร้อยแล้ว รายชื่อทั้งหมดจะแสดงในพื้นที่แผงควบคุมหลัก (ด้านขวา) เพื่อให้คุณสามารถจัดการและค้นหาได้อย่างรวดเร็ว</p>
-
-      <img src="2.png" alt="การจัดการตารางข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+      <h2 class="card-title"><span class="material-icons-round">table_chart</span> 2. การค้นหาและกรองข้อมูล</h2>
+      <p>เมื่อมีข้อมูลในระบบ คุณสามารถใช้เครื่องมือด้านบนขวาเพื่อจัดการตารางได้:</p>
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">search</span>
-          <div><b>ค้นหาข้อมูล:</b> พิมพ์ชื่อ, นามสกุล, เลขบัตรประชาชน หรือเลขสมาชิก ลงในช่อง <span class="highlight">"ค้นหารายชื่อ, เลขบัตร..."</span> ระบบจะกรองให้ทันที</div>
+          <div><b>ค้นหาข้อมูล:</b> พิมพ์ชื่อ, เลขบัตรประชาชน หรือเลขสมาชิก ลงในช่อง <span class="highlight">"ค้นหารายชื่อ, เลขบัตร..."</span></div>
         </li>
         <li>
           <span class="material-icons-round step-icon">filter_list</span>
-          <div><b>เปลี่ยนหมวดหมู่/กรม:</b> คลิกที่เมนู Dropdown (ที่มีค่าเริ่มต้นเป็น "แสดงทั้งหมด") เพื่อสลับไปดูข้อมูลเฉพาะกรมที่ต้องการได้แบบรวดเร็ว</div>
+          <div><b>เปลี่ยนหมวดหมู่/กรม:</b> คลิกที่เมนู Dropdown (ค่าเริ่มต้นคือ "แสดงทั้งหมด") เพื่อเลือกดูเฉพาะกรมที่ต้องการ</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">view_column</span>
-          <div><b>ซ่อน/แสดงคอลัมน์:</b> หากข้อมูลยาวเกินไป ให้คลิกปุ่ม <span class="highlight">"ซ่อน/แสดง"</span> สีม่วง เพื่อเลือกปิดคอลัมน์ที่ไม่ต้องการดูได้ชั่วคราว</div>
+          <div><b>ซ่อน/แสดงคอลัมน์:</b> หากตารางยาวเกินไป ให้คลิกปุ่ม <span class="highlight">"ซ่อน/แสดง"</span> สีม่วง เพื่อเลือกปิดคอลัมน์ได้</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">file_download</span>
-          <div><b>ดาวน์โหลด Excel:</b> คลิกปุ่ม <span class="highlight">"Export"</span> สีเขียว ระบบจะดึงตารางที่แสดงอยู่หน้าจอออกมาเป็นไฟล์ Excel (.xlsx) ทันที</div>
+          <div><b>ดาวน์โหลด Excel:</b> คลิกปุ่ม <span class="highlight">"Export"</span> สีเขียว เพื่อดึงตารางออกมาเป็นไฟล์ Excel (.xlsx)</div>
         </li>
       </ul>
     </div>
 
     <div class="card">
-      <h2 class="card-title"><span class="material-icons-round">assignment_ind</span> 3. การดูสรุปรายละเอียดรายบุคคล (Pop-up)</h2>
-      <p>หากต้องการดูข้อมูลยอดเงินแบบละเอียดและอ่านง่าย สามารถกดดูเป็นรายบุคคลได้ทันที</p>
-
-      <img src="3.png" alt="หน้าต่างรายละเอียดสมาชิก" class="image-showcase" onerror="this.style.display='none'">
+      <h2 class="card-title"><span class="material-icons-round">assignment_ind</span> 3. การดูสรุปรายละเอียดรายบุคคล (หน้าต่าง Pop-up)</h2>
+      <p>เพื่อให้การตรวจสอบยอดเงินทำได้ง่ายและลดความผิดพลาด ระบบมีหน้าต่างสรุปข้อมูลรายบุคคลให้ใช้งาน โดยมีขั้นตอนดังนี้:</p>
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">ads_click</span>
-          <div>นำเมาส์ไปชี้ที่รายชื่อในตาราง (แถวจะเปลี่ยนสีไฮไลท์) จากนั้นให้ <span class="highlight">"คลิก"</span> ที่แถวนั้น</div>
-        </li>
-        <li>
-          <span class="material-icons-round step-icon">splitscreen</span>
-          <div>ระบบจะเปิดหน้าต่าง Pop-up แสดงข้อมูลทางการเงินทั้งหมดแยกเป็น 2 ฝั่งซ้าย-ขวา เพื่อให้อ่านง่ายและเปรียบเทียบข้อมูลได้สะดวก</div>
+          <div><b>ขั้นที่ 1: การเลือกรายชื่อ</b> <br>นำเมาส์ไปชี้ที่รายชื่อในตาราง (ดังรูปด้านล่าง <b>แถวจะเปลี่ยนสีเป็นแถบไฮไลท์สีม่วงอ่อน</b> เพื่อให้รู้ว่าคุณกำลังโฟกัสที่รายการไหน) จากนั้นให้ <span class="highlight">"คลิก"</span> ที่แถวนั้น 1 ครั้ง</div>
         </li>
       </ul>
+      
+      <img src="2.png" alt="การเอาเมาส์ไปชี้ที่แถวในตาราง" class="image-showcase" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
 
-      <img src="4.png" alt="รายละเอียดเพิ่มเติมของหน้าต่าง" class="image-showcase" style="margin-top: 30px;" onerror="this.style.display='none'">
+      <ul class="step-list">
+        <li>
+          <span class="material-icons-round step-icon">splitscreen</span>
+          <div><b>ขั้นที่ 2: หน้าต่างสรุปข้อมูล</b> <br>ระบบจะเปิดหน้าต่าง Pop-up สรุปรายละเอียดสมาชิกขึ้นมา แสดงข้อมูลทางการเงินทั้งหมดแยกเป็น 2 ฝั่งซ้าย-ขวา เพื่อให้อ่านง่ายและชัดเจน</div>
+        </li>
+      </ul>
+      
+      <img src="3.png" alt="หน้าต่างรายละเอียดสมาชิก" class="image-showcase" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">monetization_on</span>
-          <div><b>ยอดสุทธิ:</b> จะถูกจัดวางไว้ที่ตำแหน่งขวาล่างสุดเสมอ พร้อมไฮไลท์แถบสีม่วงเข้มและตัวอักษรขนาดใหญ่ เพื่อเน้นยอดรับจริงให้ชัดเจนที่สุด</div>
-        </li>
-        <li>
-          <span class="material-icons-round step-icon">close</span>
-          <div>เมื่อต้องการปิดหน้าต่าง ให้คลิกเครื่องหมาย <span class="highlight">"X"</span> ที่มุมขวาบน หรือคลิกที่พื้นที่ว่างสีเทานอกกรอบสี่เหลี่ยม</div>
+          <div><b>ขั้นที่ 3: ตรวจสอบยอดสุทธิ</b> <br>เมื่อเลื่อนลงมาด้านล่างสุดของหน้าต่าง Pop-up จะพบกับ <b>"ยอดสุทธิ"</b> ซึ่งถูกตั้งค่าให้อยู่ตำแหน่งสุดท้ายเสมอ พร้อมแถบสีม่วงเข้มและตัวอักษรขนาดใหญ่ เพื่อเน้นย้ำให้เห็นชัดเจนที่สุด</div>
         </li>
       </ul>
+      
+      <img src="4.png" alt="ยอดสุทธิที่ด้านล่างของหน้าต่าง" class="image-showcase" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+
     </div>
 
     <div style="text-align: center; margin-bottom: 40px;">
@@ -234,6 +292,32 @@
     </div>
 
   </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      
+      // เอารูปที่ถูกคลิกมาใส่ในหน้าต่างเต็มจอ
+      lightboxImg.src = imageSrc;
+      
+      // แสดงหน้าต่าง
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('imageLightbox');
+      // ซ่อนหน้าต่าง
+      lightbox.classList.remove('active');
+    }
+
+    // ฟังก์ชันรองรับการกดปุ่ม ESC เพื่อปิดรูป
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  </script>
 
 </body>
 </html>
