@@ -115,19 +115,11 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       margin: 20px 0;
       transition: transform 0.3s ease;
+      display: block;
     }
 
     .image-showcase:hover {
       transform: scale(1.02);
-    }
-
-    .note-box {
-      background: rgba(255, 165, 2, 0.1);
-      border-left: 4px solid var(--warning);
-      padding: 15px 20px;
-      border-radius: 0 8px 8px 0;
-      margin-top: 20px;
-      font-size: 15px;
     }
 
     .btn-top {
@@ -158,14 +150,14 @@
 
     <div class="card">
       <h2 class="card-title"><span class="material-icons-round">cloud_upload</span> 1. การนำเข้าและประมวลผลข้อมูล</h2>
-      <p>ระบบถูกออกแบบมาให้อ่านข้อมูลจากไฟล์ PDF และจัดเรียงเป็นตารางให้โดยอัตโนมัติ โดยมีขั้นตอนดังนี้:</p>
+      <p>ระบบถูกออกแบบมาให้อ่านข้อมูลจากไฟล์เอกสาร PDF และจัดเรียงเป็นตารางให้โดยอัตโนมัติ ใช้งานง่ายๆ ดังนี้:</p>
       
-      <img src="1.jpg" alt="หน้าต่างนำเข้าข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+      <img src="1.png" alt="หน้าต่างนำเข้าข้อมูล" class="image-showcase" onerror="this.style.display='none'">
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">looks_one</span>
-          <div>ไปที่แถบเมนูด้านซ้าย ในส่วนของ <b>"เลือกชีตปลายทาง"</b> แนะนำให้ปล่อยเป็น <span class="highlight">✨ ตรวจสอบอัตโนมัติ (แนะนำ)</span> ระบบจะคัดแยกกรมและประเภทให้เอง</div>
+          <div>ไปที่แถบเมนูด้านซ้าย ในส่วนของ <b>"เลือกชีตปลายทาง"</b> ให้ปล่อยเป็น <span class="highlight">✨ ตรวจสอบอัตโนมัติ</span> เพื่อให้ระบบคัดแยกกรมและประเภทให้เอง</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">looks_two</span>
@@ -173,56 +165,60 @@
         </li>
         <li>
           <span class="material-icons-round step-icon">looks_3</span>
-          <div>คลิกปุ่ม <span class="highlight">▶ เริ่มการประมวลผล</span> สีน้ำเงิน และรอระบบดำเนินการจนหน้าต่างโหลดเสร็จสิ้น</div>
+          <div>คลิกปุ่ม <span class="highlight">▶ เริ่มการประมวลผล</span> สีน้ำเงิน และรอระบบดำเนินการสกัดข้อมูลจนเสร็จสิ้น</div>
         </li>
       </ul>
     </div>
 
     <div class="card">
       <h2 class="card-title"><span class="material-icons-round">table_chart</span> 2. การค้นหาและจัดการตารางข้อมูล</h2>
-      <p>เมื่อนำเข้าข้อมูลเรียบร้อยแล้ว รายชื่อทั้งหมดจะแสดงในพื้นที่แผงควบคุมหลัก (ด้านขวา)</p>
+      <p>เมื่อนำเข้าข้อมูลเรียบร้อยแล้ว รายชื่อทั้งหมดจะแสดงในพื้นที่แผงควบคุมหลัก (ด้านขวา) เพื่อให้คุณสามารถจัดการและค้นหาได้อย่างรวดเร็ว</p>
 
-      <img src="2.jpg" alt="การจัดการตารางข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+      <img src="2.png" alt="การจัดการตารางข้อมูล" class="image-showcase" onerror="this.style.display='none'">
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">search</span>
-          <div><b>การค้นหา:</b> พิมพ์ชื่อ, นามสกุล, เลขบัตรประชาชน หรือเลขสมาชิก ลงในช่อง <span class="highlight">"ค้นหารายชื่อ, เลขบัตร..."</span> ระบบจะกรองข้อมูลให้ทันที</div>
+          <div><b>ค้นหาข้อมูล:</b> พิมพ์ชื่อ, นามสกุล, เลขบัตรประชาชน หรือเลขสมาชิก ลงในช่อง <span class="highlight">"ค้นหารายชื่อ, เลขบัตร..."</span> ระบบจะกรองให้ทันที</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">filter_list</span>
-          <div><b>การเปลี่ยนชีต/กรม:</b> คลิกที่เมนู Dropdown (ที่มีค่าเริ่มต้นเป็น "แสดงทั้งหมด") เพื่อสลับไปดูข้อมูลเฉพาะกรม หรือเฉพาะประเภท (บำเหน็จ/บำนาญ) ที่ต้องการ</div>
+          <div><b>เปลี่ยนหมวดหมู่/กรม:</b> คลิกที่เมนู Dropdown (ที่มีค่าเริ่มต้นเป็น "แสดงทั้งหมด") เพื่อสลับไปดูข้อมูลเฉพาะกรมที่ต้องการได้แบบรวดเร็ว</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">view_column</span>
-          <div><b>ซ่อน/แสดงคอลัมน์:</b> หากข้อมูลในตารางยาวเกินไป ให้คลิกปุ่ม <span class="highlight">"ซ่อน/แสดง"</span> สีม่วง เพื่อเลือกปิดคอลัมน์ที่ไม่ต้องการดูได้</div>
+          <div><b>ซ่อน/แสดงคอลัมน์:</b> หากข้อมูลยาวเกินไป ให้คลิกปุ่ม <span class="highlight">"ซ่อน/แสดง"</span> สีม่วง เพื่อเลือกปิดคอลัมน์ที่ไม่ต้องการดูได้ชั่วคราว</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">file_download</span>
-          <div><b>ดาวน์โหลดข้อมูล (Export):</b> คลิกปุ่ม <span class="highlight">"Export"</span> สีเขียว ระบบจะดาวน์โหลดข้อมูลที่แสดงอยู่บนหน้าจอออกมาเป็นไฟล์ Excel (.xlsx)</div>
+          <div><b>ดาวน์โหลด Excel:</b> คลิกปุ่ม <span class="highlight">"Export"</span> สีเขียว ระบบจะดึงตารางที่แสดงอยู่หน้าจอออกมาเป็นไฟล์ Excel (.xlsx) ทันที</div>
         </li>
       </ul>
     </div>
 
     <div class="card">
       <h2 class="card-title"><span class="material-icons-round">assignment_ind</span> 3. การดูสรุปรายละเอียดรายบุคคล (Pop-up)</h2>
-      <p>คุณสามารถดูข้อมูลเชิงลึกและยอดการเงินของสมาชิกแต่ละคนได้อย่างง่ายดายและชัดเจนยิ่งขึ้น</p>
+      <p>หากต้องการดูข้อมูลยอดเงินแบบละเอียดและอ่านง่าย สามารถกดดูเป็นรายบุคคลได้ทันที</p>
 
       <img src="3.png" alt="หน้าต่างรายละเอียดสมาชิก" class="image-showcase" onerror="this.style.display='none'">
-      <img src="4.png" alt="หน้าต่างรายละเอียดสมาชิกเพิ่มเติม" class="image-showcase" style="margin-top: 10px;" onerror="this.style.display='none'">
 
       <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">ads_click</span>
-          <div>นำเมาส์ไปชี้ที่รายชื่อในตาราง (แถวจะเปลี่ยนสีเป็นสีม่วงอ่อน) จากนั้นให้ <span class="highlight">"คลิก"</span> ที่แถวนั้น</div>
+          <div>นำเมาส์ไปชี้ที่รายชื่อในตาราง (แถวจะเปลี่ยนสีไฮไลท์) จากนั้นให้ <span class="highlight">"คลิก"</span> ที่แถวนั้น</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">splitscreen</span>
           <div>ระบบจะเปิดหน้าต่าง Pop-up แสดงข้อมูลทางการเงินทั้งหมดแยกเป็น 2 ฝั่งซ้าย-ขวา เพื่อให้อ่านง่ายและเปรียบเทียบข้อมูลได้สะดวก</div>
         </li>
+      </ul>
+
+      <img src="4.png" alt="รายละเอียดเพิ่มเติมของหน้าต่าง" class="image-showcase" style="margin-top: 30px;" onerror="this.style.display='none'">
+
+      <ul class="step-list">
         <li>
           <span class="material-icons-round step-icon">monetization_on</span>
-          <div><b>ยอดสุทธิ:</b> จะถูกจัดวางไว้ที่ตำแหน่งขวาล่างสุดเสมอ พร้อมไฮไลท์แถบสีม่วงเข้มและตัวอักษรขนาดใหญ่ เพื่อให้เห็นยอดรับจริงได้ชัดเจนที่สุด</div>
+          <div><b>ยอดสุทธิ:</b> จะถูกจัดวางไว้ที่ตำแหน่งขวาล่างสุดเสมอ พร้อมไฮไลท์แถบสีม่วงเข้มและตัวอักษรขนาดใหญ่ เพื่อเน้นยอดรับจริงให้ชัดเจนที่สุด</div>
         </li>
         <li>
           <span class="material-icons-round step-icon">close</span>
