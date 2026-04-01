@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คู่มือการใช้งาน: ระบบฐานข้อมูลบำเหน็จบำนาญ</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #8A8AE6;
+      --primary-hover: #7373D1;
+      --text-dark: #4A4A6A;
+      --text-light: #7A7A9A;
+      --bg-color: #f2f5fc;
+      --card-bg: rgba(255, 255, 255, 0.95);
+    }
+    
+    body {
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* พื้นหลังตกแต่งให้เหมือนระบบหลัก */
+    body::before {
+      content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 40vh; z-index: -1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%238A8AE6' fill-opacity='0.1' d='M0,224L48,202.7C96,181,192,139,288,138.7C384,139,480,181,576,202.7C672,224,768,224,864,208C960,192,1056,160,1152,144C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .header-box {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-box h1 {
+      color: var(--primary);
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .header-box p {
+      color: var(--text-light);
+      font-size: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 35px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(138, 138, 230, 0.1);
+      border: 1px solid rgba(138, 138, 230, 0.2);
+    }
+
+    .card-title {
+      font-size: 22px;
+      color: var(--primary);
+      border-bottom: 2px dashed #D1D1F0;
+      padding-bottom: 15px;
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .step-list li {
+      margin-bottom: 15px;
+      font-size: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .step-icon {
+      color: var(--primary);
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--primary-hover);
+    }
+
+    .image-showcase {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #e0e0f5;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin: 20px 0;
+      transition: transform 0.3s ease;
+    }
+
+    .image-showcase:hover {
+      transform: scale(1.02);
+    }
+
+    .note-box {
+      background: rgba(255, 165, 2, 0.1);
+      border-left: 4px solid var(--warning);
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+
+    .btn-top {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-top:hover {
+      background: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="header-box">
+      <h1><span class="material-icons-round" style="font-size: 40px;">menu_book</span> คู่มือการใช้งานระบบ</h1>
+      <p>ระบบฐานข้อมูลบำเหน็จบำนาญ (Pension Management System)</p>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title"><span class="material-icons-round">cloud_upload</span> 1. การนำเข้าและประมวลผลข้อมูล</h2>
+      <p>ระบบถูกออกแบบมาให้อ่านข้อมูลจากไฟล์ PDF และจัดเรียงเป็นตารางให้โดยอัตโนมัติ โดยมีขั้นตอนดังนี้:</p>
+      
+      <img src="1.jpg" alt="หน้าต่างนำเข้าข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+
+      <ul class="step-list">
+        <li>
+          <span class="material-icons-round step-icon">looks_one</span>
+          <div>ไปที่แถบเมนูด้านซ้าย ในส่วนของ <b>"เลือกชีตปลายทาง"</b> แนะนำให้ปล่อยเป็น <span class="highlight">✨ ตรวจสอบอัตโนมัติ (แนะนำ)</span> ระบบจะคัดแยกกรมและประเภทให้เอง</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">looks_two</span>
+          <div>คลิกที่กล่องสี่เหลี่ยม <b>"คลิกที่นี่เพื่อเลือกไฟล์ PDF"</b> หรือลากไฟล์ PDF มาวางในกล่อง (สามารถเลือกหลายไฟล์พร้อมกันได้)</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">looks_3</span>
+          <div>คลิกปุ่ม <span class="highlight">▶ เริ่มการประมวลผล</span> สีน้ำเงิน และรอระบบดำเนินการจนหน้าต่างโหลดเสร็จสิ้น</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title"><span class="material-icons-round">table_chart</span> 2. การค้นหาและจัดการตารางข้อมูล</h2>
+      <p>เมื่อนำเข้าข้อมูลเรียบร้อยแล้ว รายชื่อทั้งหมดจะแสดงในพื้นที่แผงควบคุมหลัก (ด้านขวา)</p>
+
+      <img src="2.jpg" alt="การจัดการตารางข้อมูล" class="image-showcase" onerror="this.style.display='none'">
+
+      <ul class="step-list">
+        <li>
+          <span class="material-icons-round step-icon">search</span>
+          <div><b>การค้นหา:</b> พิมพ์ชื่อ, นามสกุล, เลขบัตรประชาชน หรือเลขสมาชิก ลงในช่อง <span class="highlight">"ค้นหารายชื่อ, เลขบัตร..."</span> ระบบจะกรองข้อมูลให้ทันที</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">filter_list</span>
+          <div><b>การเปลี่ยนชีต/กรม:</b> คลิกที่เมนู Dropdown (ที่มีค่าเริ่มต้นเป็น "แสดงทั้งหมด") เพื่อสลับไปดูข้อมูลเฉพาะกรม หรือเฉพาะประเภท (บำเหน็จ/บำนาญ) ที่ต้องการ</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">view_column</span>
+          <div><b>ซ่อน/แสดงคอลัมน์:</b> หากข้อมูลในตารางยาวเกินไป ให้คลิกปุ่ม <span class="highlight">"ซ่อน/แสดง"</span> สีม่วง เพื่อเลือกปิดคอลัมน์ที่ไม่ต้องการดูได้</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">file_download</span>
+          <div><b>ดาวน์โหลดข้อมูล (Export):</b> คลิกปุ่ม <span class="highlight">"Export"</span> สีเขียว ระบบจะดาวน์โหลดข้อมูลที่แสดงอยู่บนหน้าจอออกมาเป็นไฟล์ Excel (.xlsx)</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title"><span class="material-icons-round">assignment_ind</span> 3. การดูสรุปรายละเอียดรายบุคคล (Pop-up)</h2>
+      <p>คุณสามารถดูข้อมูลเชิงลึกและยอดการเงินของสมาชิกแต่ละคนได้อย่างง่ายดายและชัดเจนยิ่งขึ้น</p>
+
+      <img src="3.png" alt="หน้าต่างรายละเอียดสมาชิก" class="image-showcase" onerror="this.style.display='none'">
+      <img src="4.png" alt="หน้าต่างรายละเอียดสมาชิกเพิ่มเติม" class="image-showcase" style="margin-top: 10px;" onerror="this.style.display='none'">
+
+      <ul class="step-list">
+        <li>
+          <span class="material-icons-round step-icon">ads_click</span>
+          <div>นำเมาส์ไปชี้ที่รายชื่อในตาราง (แถวจะเปลี่ยนสีเป็นสีม่วงอ่อน) จากนั้นให้ <span class="highlight">"คลิก"</span> ที่แถวนั้น</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">splitscreen</span>
+          <div>ระบบจะเปิดหน้าต่าง Pop-up แสดงข้อมูลทางการเงินทั้งหมดแยกเป็น 2 ฝั่งซ้าย-ขวา เพื่อให้อ่านง่ายและเปรียบเทียบข้อมูลได้สะดวก</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">monetization_on</span>
+          <div><b>ยอดสุทธิ:</b> จะถูกจัดวางไว้ที่ตำแหน่งขวาล่างสุดเสมอ พร้อมไฮไลท์แถบสีม่วงเข้มและตัวอักษรขนาดใหญ่ เพื่อให้เห็นยอดรับจริงได้ชัดเจนที่สุด</div>
+        </li>
+        <li>
+          <span class="material-icons-round step-icon">close</span>
+          <div>เมื่อต้องการปิดหน้าต่าง ให้คลิกเครื่องหมาย <span class="highlight">"X"</span> ที่มุมขวาบน หรือคลิกที่พื้นที่ว่างสีเทานอกกรอบสี่เหลี่ยม</div>
+        </li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+      <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="btn-top">
+        <span class="material-icons-round" style="vertical-align: middle;">arrow_upward</span> กลับขึ้นด้านบน
+      </a>
+    </div>
+
+  </div>
+
+</body>
+</html>
